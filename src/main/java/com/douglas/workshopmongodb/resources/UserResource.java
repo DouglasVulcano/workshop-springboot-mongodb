@@ -1,28 +1,26 @@
 package com.douglas.workshopmongodb.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douglas.workshopmongodb.domain.User;
+import com.douglas.workshopmongodb.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        User person = new User("1", "Douglas", "LrB2b@example.com");
-        User person2 = new User("2", "Alex", "AbsB2b@example.com");
-
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(person, person2));
-
+        List<User> list = userService.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
