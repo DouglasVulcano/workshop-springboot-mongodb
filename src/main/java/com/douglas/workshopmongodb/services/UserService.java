@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douglas.workshopmongodb.domain.User;
+import com.douglas.workshopmongodb.dto.UserDto;
 import com.douglas.workshopmongodb.repositories.UserRepository;
 import com.douglas.workshopmongodb.services.exception.ObjectNotFoundException;
 
@@ -23,5 +24,17 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = userRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return userRepository.insert(obj);
+    }
+
+    /**
+     * Esse método serve para instanciar um user a partir de um UserDto
+     * a opção de criar na classe UserService é fazer uso do acesso ao repositorio
+     */
+    public User fromDto(UserDto objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
