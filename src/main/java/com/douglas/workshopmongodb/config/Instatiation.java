@@ -19,6 +19,7 @@ public class Instatiation implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PostRepository postRepository;
 
@@ -50,5 +51,9 @@ public class Instatiation implements CommandLineRunner {
                 new AuthorDto(maria));
 
         postRepository.saveAll(List.of(post1, post2));
+
+        maria.getPosts().addAll(List.of(post1, post2));
+ 
+        userRepository.save(maria);
     }
 }
