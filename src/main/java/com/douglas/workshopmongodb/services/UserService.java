@@ -35,6 +35,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User update(User obj) {
+        User newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return userRepository.save(newObj);
+    }
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
+
     /**
      * Esse método serve para instanciar um user a partir de um UserDto
      * a opção de criar na classe UserService é fazer uso do acesso ao repositorio
