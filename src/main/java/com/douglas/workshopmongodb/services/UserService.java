@@ -30,6 +30,11 @@ public class UserService {
         return userRepository.insert(obj);
     }
 
+    public void delete(String id) {
+        findById(id);
+        userRepository.deleteById(id);
+    }
+
     /**
      * Esse método serve para instanciar um user a partir de um UserDto
      * a opção de criar na classe UserService é fazer uso do acesso ao repositorio
